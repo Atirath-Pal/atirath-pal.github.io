@@ -1,8 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const IITMandiInternship = () => {
   return (
     <section className="bg-[#F9FAF7] px-6 py-12 md:px-20 lg:px-40 font-sans">
+      <div className="mb-8">
+        <Link
+          to="/"
+          className="inline-flex items-center text-sm text-gray-600 hover:text-black"
+        >
+          ← Back to Search
+        </Link>
+      </div>
       {/* Header */}
       <h1 className="text-4xl md:text-6xl font-bold text-black mb-12">Internship at IIT Mandi</h1>
 
