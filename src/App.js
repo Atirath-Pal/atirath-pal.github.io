@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import IITMandiInternship from './pages/IIT_Mandi_Internship';
-import ProjectPage from './pages/Project_Page';
+import Image_Editor_Project from './pages/Image_Editor_Project_Page.jsx';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/internship" element={<IITMandiInternship />} />
           
           {/* Path for your Project page */}
-          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/projects" element={<Image_Editor_Project />} />
         </Routes>
       </div>
     </Router>
