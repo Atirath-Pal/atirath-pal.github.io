@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AboutMe = () => {
+const IITMandiInternship = () => {
   return (
     <section className="bg-[#F9FAF7] px-6 py-12 md:px-20 lg:px-40 font-sans">
       {/* Header */}
@@ -9,7 +9,7 @@ const AboutMe = () => {
       {/* Introduction Block: Switches from Column (Mobile) to Row (Desktop) */}
       <div className="flex flex-col lg:flex-row gap-8 items-start mb-20">
         <div className="w-full lg:w-1/2 rounded-2xl overflow-hidden bg-[#D9F2B1]">
-          {/* Replace with your exported illustration */}
+          {/* Using the public path for the image */}
           <img src="/assets/IIT-Mandi-Campus.jpg" alt="Illustration" className="w-full h-auto" />
         </div>
         
@@ -55,4 +55,4 @@ const AboutMe = () => {
   );
 };
 
-export default AboutMe;
+export default IITMandiInternship;
