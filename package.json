@@ -1,7 +1,8 @@
 {
-  "name": "iit-mandi-portfolio",
+  "name": "atirath-pal-portfolio",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://atirath-pal.github.io",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
