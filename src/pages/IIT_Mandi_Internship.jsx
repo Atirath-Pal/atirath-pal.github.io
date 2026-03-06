@@ -153,6 +153,11 @@ const IITMandiInternship = () => {
                 <span className="text-[10px] font-bold block mb-1 uppercase tracking-wider text-gray-400">Environment</span>
                 <p className="text-xs font-mono text-gray-600">Windows 11 | VS Code | Python 3.10+</p>
               </div>
+
+              <div className="bg-[#F3F4F1] p-3 rounded-lg border-l-4 border-[#D9F2B1] mt-4">
+                <span className="text-[10px] font-bold block mb-1 uppercase tracking-wider text-gray-400">Tech Stack Used</span>
+                <p className="text-xs font-mono text-gray-600">Python | Selenium | RDKit | Streamlit | AutoDock Vina | Open Babel | Biopython</p>
+              </div>
             </div>
           </div>
 
@@ -178,7 +183,7 @@ const IITMandiInternship = () => {
           </div>
         </div>
       </SectionWrapper>
-      
+
       <SectionWrapper
         title="System Architecture"
         icon={<Map />}
