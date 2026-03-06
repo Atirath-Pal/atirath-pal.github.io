@@ -251,14 +251,76 @@ const IITMandiInternship = () => {
         isOpen={!!openSections.research}
         onToggle={() => toggleSection('research')}
       >
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 text-justify text-gray-600">
-            <p>I conducted a quantitative user study with research scholars at IIT Mandi to refine the UI based on SUS scores.</p>
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* LEFT SIDE: USER STUDY DATA & FINDINGS (7 Cols) */}
+          <div className="lg:col-span-7 space-y-6 text-justify text-gray-600">
+
+            <div className="space-y-3">
+              <p className="leading-relaxed text-sm">
+                A quantitative study was conducted involving participants unfamiliar with molecular docking. Despite zero prior experience, <b>100% of participants</b> successfully performed experiments, validating the system's intuitive design.
+              </p>
+            </div>
+
+            {/* User Study Table Summary */}
+            <div className="overflow-x-auto rounded-xl border border-gray-100 shadow-sm">
+              <table className="w-full text-[11px] text-left bg-white">
+                <thead className="bg-gray-50 text-gray-800">
+                  <tr>
+                    <th className="p-2 font-bold">Evaluation Statement (Survey)</th>
+                    <th className="p-2 text-center">Avg. Score</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  <tr><td className="p-2">Interface navigation and ease of use</td><td className="p-2 text-center font-bold text-[#8FB94B]">4.8/5</td></tr>
+                  <tr><td className="p-2">Clarity of output (Binding Energy & Std Dev)</td><td className="p-2 text-center font-bold text-[#8FB94B]">4.2/5</td></tr>
+                  <tr><td className="p-2">Trust in the tool's automated output</td><td className="p-2 text-center font-bold text-[#8FB94B]">4.8/5</td></tr>
+                  <tr><td className="p-2">Preference over manual docking methods</td><td className="p-2 text-center font-bold text-[#8FB94B]">4.4/5</td></tr>
+                  <tr><td className="p-2">Perceived time saving and complexity reduction</td><td className="p-2 text-center font-bold text-[#8FB94B]">4.8/5</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+              {/* Visual Stats Row */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-black rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-800">
+                <div className="flex mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className={i < 4 ? "text-[#D9F2B1] text-lg" : "text-gray-600 text-lg"}>★</span>
+                  ))}
+                </div>
+                <p className="text-3xl font-bold text-[#D9F2B1]">4.5<span className="text-sm text-gray-400">/5</span></p>
+                <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">User Satisfaction</p>
+              </div>
+
+              <div className="bg-[#D9F2B1] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-[#c5db9f]">
+                <p className="text-3xl font-bold text-gray-900">~90%</p>
+                <p className="text-[10px] uppercase tracking-widest text-gray-800 font-semibold text-center">Efficiency Gain</p>
+                <p className="text-[9px] text-gray-700 mt-1 font-mono">50m → 5m</p>
+              </div>
+            </div>
+
+
+            <div className="space-y-3">
+              <h4 className="text-sm font-bold text-gray-800">Evaluation of Project Performance</h4>
+              <ul className="text-xs space-y-2 list-disc list-inside bg-[#F9FBFA] p-4 rounded-lg border-l-4 border-[#D9F2B1]">
+                <li><span className="font-semibold">Consistency:</span> Scripted automation removed manual variability and human error.</li>
+                <li><span className="font-semibold">Scalability:</span> Enabled batch docking of large ligand libraries effortlessly.</li>
+                <li><span className="font-semibold">Accessibility:</span> Lowered the barrier of entry for non-specialist researchers.</li>
+              </ul>
+            </div>
           </div>
-          <div className="bg-black text-white p-6 rounded-2xl flex flex-col justify-center text-center">
-            <p className="text-3xl font-bold text-[#D9F2B1]">90%</p>
-            <p className="text-sm text-gray-400">Error Reduction</p>
+
+          {/* RIGHT SIDE: IMAGE (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-center gap-4">
+            <div className="space-y-2">
+              <div className="rounded-xl overflow-hidden border border-gray-100 bg-white shadow-sm p-1">
+                <img src="/assets/User-study.jpg" alt="User Study Evaluation" className="w-full h-auto object-contain mx-auto" />
+              </div>
+              <p className="text-[10px] text-center text-gray-400 italic">Figure: Participants performing experiments using the automated pipeline.</p>
+            </div>
           </div>
+
         </div>
       </SectionWrapper>
 
