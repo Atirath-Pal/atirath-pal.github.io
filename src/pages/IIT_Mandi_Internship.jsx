@@ -190,11 +190,58 @@ const IITMandiInternship = () => {
         isOpen={!!openSections.flowchart}
         onToggle={() => toggleSection('flowchart')}
       >
-        <div className="mt-6 space-y-6">
-          <p className="text-gray-600 text-justify">The docking pipeline follows a modular logic to ensure reproducibility across protein-ligand pairs.</p>
-          <div className="w-full rounded-xl bg-white p-4 md:p-8 border border-gray-200 shadow-sm flex flex-col items-center">
-            <img src="/assets/flowchart.svg" alt="Flowchart" className="max-w-full h-auto object-contain" style={{ maxHeight: '600px' }} />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-6">
+          
+          {/* LEFT SIDE: TEXT CONTENT (5 Cols - Narrower for more lines) */}
+          <div className="lg:col-span-5 space-y-6 text-justify text-gray-600">
+            <p className="leading-relaxed">
+              The docking pipeline is engineered with a modular, 5-stage architecture. This design ensures that each computational step is isolated, allowing the system to handle multiple ligands simultaneously while maintaining high data integrity.
+            </p>
+
+            <div className="space-y-5">
+              <div className="relative pl-4 border-l-2 border-[#D9F2B1]">
+                <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide">1. Data Retrieval</h4>
+                <p className="text-sm mt-1">Automated fetching of receptor FASTA sequences from NCBI and 3D ligand structures from PubChem via Entrez and API integration.</p>
+              </div>
+
+              <div className="relative pl-4 border-l-2 border-[#D9F2B1]">
+                <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide">2. Structural Validation</h4>
+                <p className="text-sm mt-1">Interfacing with SWISS-MODEL via Selenium to generate 3D models and verifying structural reliability through Ramachandran Plot analysis.</p>
+              </div>
+
+              <div className="relative pl-4 border-l-2 border-[#D9F2B1]">
+                <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide">3. Pre-Processing</h4>
+                <p className="text-sm mt-1">Utilizing Open Babel for molecular 'cleaning'—adding hydrogens, removing water molecules, and adding Gasteiger charges for PDBQT conversion.</p>
+              </div>
+
+              <div className="relative pl-4 border-l-2 border-[#D9F2B1]">
+                <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide">4. Simulation Execution</h4>
+                <p className="text-sm mt-1">Dynamic generation of AutoDock Vina configuration files followed by the automated execution of the docking simulation engine.</p>
+              </div>
+
+              <div className="relative pl-4 border-l-2 border-[#D9F2B1]">
+                <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide">5. Result Analysis</h4>
+                <p className="text-sm mt-1">Automated parsing of Vina log files to extract binding energies, ranking candidates, and exporting results into a research-ready CSV format.</p>
+              </div>
+            </div>
           </div>
+
+          {/* RIGHT SIDE: FLOWCHART (7 Cols - Larger Image Area) */}
+          <div className="lg:col-span-7 flex flex-col items-center">
+            <div className="w-full rounded-xl bg-white p-2 border border-gray-100 shadow-sm overflow-hidden">
+              <img 
+                src="/assets/flowchart.svg" 
+                alt="System Architecture Flowchart" 
+                className="w-full h-auto object-contain" 
+              />
+            </div>
+            <div className="mt-4 p-3 bg-gray-50 rounded-lg border-t border-gray-100 w-full">
+               <p className="text-[11px] text-center text-gray-500 italic">
+                <b>Figure:</b> Sequential Logic Flow — Illustrating the automated transition from biological database queries to final structural binding analysis.
+              </p>
+            </div>
+          </div>
+
         </div>
       </SectionWrapper>
 
