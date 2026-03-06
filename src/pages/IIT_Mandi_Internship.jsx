@@ -79,7 +79,7 @@ const IITMandiInternship = () => {
       {/* INTRODUCTION */}
       <div className="flex flex-col lg:flex-row gap-12 items-start mb-16">
         <div className="w-full lg:w-1/2 rounded-2xl overflow-hidden bg-gray-200 aspect-video shadow-lg">
-          <img src="/assets/IIT-Mandi-Campus.jpg" alt="IIT Mandi" className="w-full h-full object-cover" />
+          <img src="/assets/CHCi-Lab.jpg" alt="IIT Mandi" className="w-full h-full object-cover" />
         </div>
         <div className="w-full lg:w-1/2 text-justify">
           <h2 className="text-2xl font-bold mb-6 border-b-2 border-[#D9F2B1] inline-block">Introduction</h2>
@@ -382,13 +382,51 @@ const IITMandiInternship = () => {
 
       <SectionWrapper
         title="Meeting a Legend"
-        icon={<Star />}
+        icon={<Star className="text-yellow-500 fill-yellow-500" />} // Added a little gold pop
         isOpen={!!openSections.hcverma}
         onToggle={() => toggleSection('hcverma')}
       >
-        <div className="mt-6 flex flex-col items-center text-center max-w-2xl mx-auto">
-          <div className="w-48 h-48 rounded-full border-4 border-[#D9F2B1] bg-gray-100 mb-6 flex items-center justify-center italic text-gray-400">Image 5</div>
-          <p className="text-gray-600 italic">"His simplicity and clarity in explaining physics mirrored the kind of researcher I aspire to be."</p>
+        <div className="mt-8 flex flex-col md:flex-row items-center gap-10 max-w-4xl mx-auto pb-6">
+
+          {/* The Selfie Frame */}
+          <div className="relative group">
+            {/* Decorative background element */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#D9F2B1] to-transparent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+
+            <div className="relative w-64 h-80 bg-white p-3 pb-12 shadow-2xl border border-gray-100 transform -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
+              <img 
+                src="/assets/Selfie HC Verma Sir.jpg" // Make sure this filename matches exactly!
+                alt="Selfie with HC Verma"
+                className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+              />
+              <div className="absolute bottom-3 left-0 right-0 text-center">
+                <p className="font-handwriting text-gray-400 text-sm tracking-widest uppercase">IIT Mandi, 2025</p>
+              </div>
+            </div>
+          </div>
+
+          {/* The Thoughts */}
+          <div className="flex-1 space-y-6">
+            <div className="relative">
+              <span className="text-6xl text-[#D9F2B1] absolute -top-8 -left-4 opacity-50 font-serif">“</span>
+              <p className="text-xl md:text-2xl text-gray-800 leading-relaxed font-light italic relative z-10 text-justify">
+                "From solving his concepts in school to discussing research at IIT Mandi—meeting Dr. H.C. Verma felt like a full-circle moment. Seeing the man behind the legendary 'Concepts of Physics' taught me that true genius lies in being profoundly simple."
+              </p>
+            </div>
+
+            <div className="h-px w-20 bg-[#D9F2B1]"></div>
+
+            <div className="space-y-4">
+              <p className="text-gray-600 leading-relaxed">
+                “I asked him about AI, and he told me to use my own Imagination. That changed how I look at problem-solving. (❁´◡`❁)”
+              </p>
+
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 rounded-full border border-gray-100">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Inspirational Moment</span>
+              </div>
+            </div>
+          </div>
         </div>
       </SectionWrapper>
 
