@@ -99,20 +99,86 @@ const IITMandiInternship = () => {
         isOpen={!!openSections.coding}
         onToggle={() => toggleSection('coding')}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-          <div className="text-justify text-gray-600 space-y-4">
-            <p>I built the backend using Python, integrating Selenium for automated data scraping. This allowed for high-throughput docking without manual file downloads.</p>
-            <div className="bg-[#F3F4F1] p-4 rounded-lg border-l-4 border-[#D9F2B1]">
-              <span className="text-sm font-bold block mb-1">Tech Stack:</span>
-              <p className="text-xs font-mono">Python, Selenium, RDKit, Streamlit</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-6 mt-6">
+
+          {/* LEFT SIDE: DETAILED TEXT CONTENT (7 Cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-start space-y-8">
+
+            {/* 1. Development & Automation */}
+            <div className="text-justify text-gray-600 space-y-2">
+              <h3 className="text-md font-bold text-gray-800">1. Development & Automation</h3>
+              <p className="leading-relaxed">
+                I developed a modular, high-throughput pipeline that automates the transition from biological sequences to docking results. 
+                By integrating web automation with local computational engines, the system achieves a <b>90% reduction</b> in manual processing time (from 50 minutes to 5 minutes).
+              </p>
+            </div>
+
+            {/* 2. Tools and Technologies Used */}
+            <div className="text-justify text-gray-600 space-y-3">
+              <h3 className="text-md font-bold text-gray-800">2. Tools and Technologies Used</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                <p><span className="font-semibold text-gray-700">Python:</span> Core scripting & UI logic.</p>
+                <p><span className="font-semibold text-gray-700">AutoDock Vina:</span> Primary docking engine.</p>
+                <p><span className="font-semibold text-gray-700">Open Babel:</span> Structure cleaning & conversion.</p>
+                <p><span className="font-semibold text-gray-700">PyMOL:</span> 3D molecular visualization.</p>
+                <p><span className="font-semibold text-gray-700">Selenium:</span> SWISS-MODEL automation.</p>
+                <p><span className="font-semibold text-gray-700">Biopython:</span> NCBI/Entrez data retrieval.</p>
+                <p><span className="font-semibold text-gray-700">PubChem API:</span> Ligand structure downloads.</p>
+                <p><span className="font-semibold text-gray-700">Shell Scripting:</span> Batch job integration.</p>
+              </div>
+            </div>
+
+            {/* 3. Libraries/Modules Used */}
+            <div className="text-justify text-gray-600 space-y-4">
+              <h3 className="text-md font-bold text-gray-800">3. Libraries/Modules Used</h3>
+
+              <div className="space-y-3">
+                <div>
+                  <span className="text-xs font-bold text-[#8FB94B] uppercase tracking-wider">Standard & System:</span>
+                  <p className="text-sm mt-1 text-gray-500 italic">os, sys, shutil, subprocess (CLI Bridge), threading (Parallelism), re, glob</p>
+                </div>
+
+                <div>
+                  <span className="text-xs font-bold text-[#8FB94B] uppercase tracking-wider">Data & Web:</span>
+                  <p className="text-sm mt-1 text-gray-500 italic">Pandas (Tabular Logs), NumPy (Calculations), Streamlit (UI), BeautifulSoup & Requests</p>
+                </div>
+
+                <div>
+                  <span className="text-xs font-bold text-[#8FB94B] uppercase tracking-wider">Specialized Cheminformatics:</span>
+                  <p className="text-sm mt-1 text-gray-500 italic">RDKit (SMILES Parsing), Selenium Webdriver (Dynamic Automation)</p>
+                </div>
+              </div>
+
+              <div className="bg-[#F3F4F1] p-3 rounded-lg border-l-4 border-[#D9F2B1] mt-4">
+                <span className="text-[10px] font-bold block mb-1 uppercase tracking-wider text-gray-400">Environment</span>
+                <p className="text-xs font-mono text-gray-600">Windows 11 | VS Code | Python 3.10+</p>
+              </div>
             </div>
           </div>
-          <div className="rounded-xl overflow-hidden border border-gray-100 aspect-video bg-white shadow-inner">
-            <img src="/assets/Loading-Screen.png" alt="Dashboard" className="w-full h-full object-cover" />
+
+          {/* RIGHT SIDE: 1 COLUMN, 4 ROWS (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-5">
+            {[
+              { src: "/assets/Loading-Screen.png", label: "User Input Interface" },
+              { src: "/assets/random_seed_docking.png", label: "Docking Configuration" },
+              { src: "/assets/ramachandran_plot.png", label: "Ramachandran Plot Validation" },
+              { src: "/assets/output_interface.png", label: "Final Docking Results" }
+            ].map((img, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="w-full rounded-lg overflow-hidden border border-gray-100 bg-white shadow-sm p-1">
+                  <img 
+                    src={img.src} 
+                    alt={img.label} 
+                    className="w-full h-auto max-h-44 object-contain mx-auto" 
+                  />
+                </div>
+                <p className="text-[10px] text-gray-400 mt-1 italic">{img.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </SectionWrapper>
-
+      
       <SectionWrapper
         title="System Architecture"
         icon={<Map />}
