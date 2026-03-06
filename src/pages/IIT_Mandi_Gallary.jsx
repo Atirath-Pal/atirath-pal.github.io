@@ -1,35 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Camera } from 'lucide-react';
+import { ArrowLeft, Camera, X, Maximize2 } from 'lucide-react';
 
 const IITMandiGallery = () => {
+  const [selectedImg, setSelectedImg] = useState(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   /**
-   * AUTOMATED SCAN LOGIC:
-   * require.context(directory, useSubdirectories, regExp)
-   * This tells Webpack to look into your src/assets/Mandi_pic folder
-   * and grab every file ending in .jpg, .jpeg, .png, or .JPG
+   * DYNAMIC LOAD LOGIC:
+   * 1. Scans the 'thumbs' folder for .webp files.
+   * 2. Automatically links them to the same filename in the 'originals' folder as .jpg.
+   * 3. Formats the filename (e.g., 'Trek_to_River') into a clean label ('Trek to River').
    */
   const importAll = (r) => {
-    return r.keys().map((item, index) => ({
-      id: index + 1,
-      src: r(item),
-      // This regex pulls the filename out of the path to use as a label
-      label: item.replace('./', '').split('.')[0].replace(/[-_]/g, ' ')
-    }));
+    return r.keys().map((item, index) => {
+      const fileNameWithExt = item.replace('./', '');
+      const fileNameNoExt = fileNameWithExt.split('.')[0];
+
+      return {
+        id: index + 1,
+        // The path to the WebP thumbnail (managed by Webpack)
+        thumb: r(item),
+        // The path to the High-Res JPG (located in public/assets/Mandi_pic/originals/)
+        full: `/assets/Mandi_pic/originals/${fileNameNoExt}.jpg`,
+        // Clean label: replaces underscores with spaces
+        label: fileNameNoExt.replace(/_/g, ' ')
+      };
+    });
   };
 
-  // Note: The path is relative to THIS file (src/pages/IITMandiGallery.jsx)
-  // Adjust the dots if your folder structure is different
+  // Note: Ensure the path '../assets/Mandi_pic/thumbs' is correct relative to this file
   const allImages = importAll(
-    require.context('../assets/Mandi_pic', false, /\.(png|jpe?g|svg|JPG|JPEG)$/)
+    require.context('../assets/Mandi_pic/thumbs', false, /\.(webp)$/)
   );
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] p-6 md:p-12">
+    <div className={`min-h-screen bg-[#FAFAFA] p-6 md:p-12 ${selectedImg ? 'overflow-hidden' : ''}`}>
+      
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -48,12 +58,12 @@ const IITMandiGallery = () => {
             </h1>
           </div>
           <p className="text-gray-500 text-lg max-w-2xl italic">
-            "Automated log of {allImages.length} memories captured at IIT Mandi."
+            "A visual journey through {allImages.length} optimized memories."
           </p>
         </div>
 
         <div className="bg-black text-white px-6 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase">
-          Dynamic Load Active
+          Performance Mode: WebP + Lazy Load
         </div>
       </div>
 
@@ -62,27 +72,55 @@ const IITMandiGallery = () => {
         {allImages.map((img) => (
           <div 
             key={img.id} 
-            className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 bg-white group"
+            onClick={() => setSelectedImg(img)}
+            className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 bg-white group cursor-pointer"
           >
             <div className="relative overflow-hidden">
               <img 
-                src={img.src} 
+                src={img.thumb} 
                 alt={img.label} 
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy" 
               />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                 <span className="text-white text-[10px] font-bold uppercase tracking-widest bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                    {img.label}
-                 </span>
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+                <Maximize2 className="text-white mb-2" size={24} />
+                <span className="text-white text-[10px] font-bold uppercase tracking-widest text-center px-3 py-1 bg-black/50 rounded-full backdrop-blur-sm">
+                  {img.label}
+                </span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
+      {/* Lightbox Modal (Full Screen View) */}
+      {selectedImg && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 animate-in fade-in duration-300"
+          onClick={() => setSelectedImg(null)}
+        >
+          <button className="absolute top-6 right-6 text-white hover:rotate-90 transition-transform duration-300">
+            <X size={40} />
+          </button>
+          
+          <div className="max-w-5xl w-full flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={selectedImg.full} 
+              alt={selectedImg.label}
+              className="max-h-[80vh] w-auto rounded-lg shadow-2xl animate-in zoom-in-95 duration-300 border border-white/10"
+            />
+            <div className="mt-8 text-center">
+              <h3 className="text-[#D9F2B1] text-2xl font-light tracking-wide italic capitalize">
+                {selectedImg.label}
+              </h3>
+              <div className="h-1 w-12 bg-[#D9F2B1] mx-auto mt-2 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <footer className="mt-20 py-10 text-center border-t border-gray-100 text-gray-400 text-xs tracking-widest uppercase">
-        End of Gallery • Total {allImages.length} Images
+        End of Gallery • {allImages.length} High-Resolution Captures
       </footer>
     </div>
   );
