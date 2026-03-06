@@ -330,10 +330,53 @@ const IITMandiInternship = () => {
         isOpen={!!openSections.nature}
         onToggle={() => toggleSection('nature')}
       >
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-           {[1, 2, 3, 4].map(i => (
-             <div key={i} className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 italic">Image 4{String.fromCharCode(64+i)}</div>
-           ))}
+        <div className="mt-6 space-y-8">
+          {/* Intro Text */}
+          <p className="text-gray-600 text-justify leading-relaxed italic">
+            "Time in the mountains felt as though it stood still. My internship at IIT Mandi was not just about code and docking; it was a journey through the serene landscapes of the Himalayas and the warmth of the Kamand Valley."
+          </p>
+
+          {/* 4-Image Preview Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { src: "/assets/IIT-Mandi-North-Campus.jpg", label: "North Campus" },
+              { src: "/assets/Road-through-hill.jpg", label: "Mountain Trails" },
+              { src: "/assets/Selfie-with-HC-Verma.jpg", label: "With HC Verma Sir" },
+              { src: "/assets/Temple.jpg", label: "Kamand Culture" }
+            ].map((img, i) => (
+              <div key={i} className="group relative h-48 md:h-64 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
+                <img 
+                  src={img.src} 
+                  alt={img.label} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Overlay Label on Hover */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                  <span className="text-white text-xs font-medium tracking-wide">{img.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View All Button */}
+          <div className="flex flex-col items-center pt-2">
+            <Link to="/internships/iit-mandi/gallary"> 
+              <button 
+                className="group flex items-center gap-3 bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-[#D9F2B1]/20"
+              >
+                <span className="text-sm font-bold uppercase tracking-widest">View Full Gallery</span>
+                <div className="bg-[#D9F2B1] rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
+              </button>
+            </Link>
+            <p className="text-[10px] text-gray-400 mt-3 uppercase tracking-tighter">
+              Explore 50+ memories from the Himalayas
+            </p>
+          </div>
         </div>
       </SectionWrapper>
 
