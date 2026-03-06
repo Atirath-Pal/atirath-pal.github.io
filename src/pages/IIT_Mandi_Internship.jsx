@@ -339,10 +339,10 @@ const IITMandiInternship = () => {
           {/* 4-Image Preview Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { src: "/assets/IIT-Mandi-North-Campus.jpg", label: "North Campus" },
-              { src: "/assets/Road-through-hill.jpg", label: "Mountain Trails" },
-              { src: "/assets/Selfie-with-HC-Verma.jpg", label: "With HC Verma Sir" },
-              { src: "/assets/Temple.jpg", label: "Kamand Culture" }
+              { src: "/assets/IIT-Mandi-Campus.jpg", label: "North Campus" },
+              { src: "/assets/Me+Pranshu+Nilanjit.jpg", label: "Homie" },
+              { src: "/assets/HC_Verma_Sir.jpg", label: "Meet HC Verma Sir" },
+              { src: "/assets/MahaRishi Markandey Temple.jpg", label: "MahaRishi Markandey Temple" }
             ].map((img, i) => (
               <div key={i} className="group relative h-48 md:h-64 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
                 <img 
