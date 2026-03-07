@@ -51,6 +51,98 @@ const SectionWrapper = ({ title, icon, isOpen, onToggle, children }) => {
   );
 };
 
+const ImageSlider = ({ desktopImg, mobileImg }) => {
+  const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  useEffect(() => {
+    const isMobileView = window.innerWidth < 1024;
+    setIsMobileDevice(isMobileView);
+    if (isMobileView) {
+      setImages([mobileImg, desktopImg]); 
+    } else {
+      setImages([desktopImg, mobileImg]); 
+    }
+  }, [desktopImg, mobileImg]);
+
+  const nextSlide = () => setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
+  const prevSlide = () => setCurrentIndex((prev) => (prev === 1 ? 0 : 1));
+
+  // Swipe Logic
+  const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > 50) nextSlide();
+    if (distance < -50) prevSlide();
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  // Dynamic Caption Logic
+  const getCaption = () => {
+    if (isMobileDevice) {
+      return currentIndex === 0 ? "Mobile Version" : "Desktop Version";
+    }
+    return currentIndex === 0 ? "Desktop Version" : "Mobile Version";
+  };
+
+  if (images.length === 0) return null;
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative w-full overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 group">
+        {/* Sliding Image Track */}
+        <div 
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {images.map((img, index) => (
+            <div key={index} className="w-full flex-shrink-0 flex items-center justify-center p-2 bg-white">
+              <img 
+                src={img} 
+                alt={getCaption()} 
+                className="w-full h-auto object-contain max-h-[500px]"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows */}
+        <button onClick={prevSlide} className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 bg-black/80 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button onClick={nextSlide} className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 bg-black/80 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        {/* Indicators */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((_, i) => (
+            <div key={i} className={`h-1.5 rounded-full transition-all ${currentIndex === i ? 'bg-black w-4' : 'bg-gray-300 w-1.5'}`} />
+          ))}
+        </div>
+      </div>
+
+      {/* THE DYNAMIC CAPTION: This is what you asked for */}
+      <div className="mt-4 flex items-center gap-3">
+        <div className="h-px w-8 bg-gray-200"></div>
+        <p className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.3em] animate-pulse">
+          {getCaption()}
+        </p>
+        <div className="h-px w-8 bg-gray-200"></div>
+      </div>
+    </div>
+  );
+};
+
 // 2. THE MAIN PROJECT PAGE
 const Image_Editor_Project = () => {
   const [openSections, setOpenSections] = useState({});
@@ -130,32 +222,37 @@ const Image_Editor_Project = () => {
         isOpen={!!openSections.features}
         onToggle={() => toggleSection('features')}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-6 mt-6">
-          <div className="lg:col-span-7 space-y-8 text-justify">
-            <div className="text-gray-600 space-y-4">
-              <h3 className="text-md font-bold text-gray-800 uppercase tracking-tight">Non-Destructive Manipulation</h3>
-              <p className="leading-relaxed">
-                The editor employs a <b>buffer-based rendering system</b>. Instead of overwriting the original image data, adjustments like Brightness, Contrast, and Saturation are calculated in real-time against a source buffer, allowing for instant "Undo/Redo" without quality loss.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-left">
-                <div className="p-4 bg-gray-50 rounded-xl border-l-4 border-[#D9F2B1]">
-                  <span className="font-bold text-sm block">Precision Control</span>
-                  <p className="text-xs text-gray-500 mt-1">Fine-tuned adjustments using mathematical matrix transformations.</p>
-                </div>
-                <div className="p-4 bg-gray-50 rounded-xl border-l-4 border-[#D9F2B1]">
-                  <span className="font-bold text-sm block">Instant Presets</span>
-                  <p className="text-xs text-gray-500 mt-1">Professional-grade filters (Grayscale, Sepia, Vintage) applied in &lt;10ms.</p>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-8 mt-6 items-center text-left">
+          
+          {/* Left: Simple Points (5 Cols) */}
+          <div className="lg:col-span-5 space-y-4">
+            <h3 className="text-xl font-bold text-black mb-6">Key Capabilities</h3>
+            
+            <ul className="space-y-5">
+              {[
+                { title: "Client-Side Rendering", desc: "Lightning-fast processing directly in your browser." },
+                { title: "Privacy Guaranteed", desc: "Images never leave your device; no server uploads." },
+                { title: "Smooth & Easy Editing", desc: "Intuitive sliders for real-time adjustments." },
+                { title: "Instant Download", desc: "Save your edited masterpieces with a single click." },
+                { title: "Mobile-First UI", desc: "Fully responsive design for editing on the go." }
+              ].map((feature, idx) => (
+                <li key={idx} className="flex gap-4 items-start">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-[#D9F2B1] shrink-0" />
+                  <div>
+                    <span className="font-bold text-gray-900 block">{feature.title}</span>
+                    <p className="text-sm text-gray-500">{feature.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="rounded-xl overflow-hidden border border-gray-100 bg-white shadow-sm p-2">
-               <img src="/assets/Desktop_UI_Image_Editor_Project.png" alt="Adjustment Panel UI" className="w-full h-auto object-contain mx-auto" />
-            </div>
-            <p className="text-[10px] text-gray-400 text-center italic uppercase">UI: Filter & Adjustment Controls</p>
+          {/* Right: Adaptive Image Slider (7 Cols) */}
+          <div className="lg:col-span-7">
+            <ImageSlider 
+              desktopImg="/assets/Desktop_UI_Image_Editor_Project.png" 
+              mobileImg="/assets/Mobile_UI_Image_Editor_Project.png" 
+            />
           </div>
         </div>
       </SectionWrapper>
