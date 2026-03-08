@@ -264,46 +264,48 @@ const Image_Editor_Project = () => {
         isOpen={!!openSections.tech}
         onToggle={() => toggleSection('tech')}
       >
-        <div className="mt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-             <div className="lg:col-span-8 space-y-6">
-                <p className="text-gray-600 leading-relaxed text-justify">
-                  To achieve maximum performance without a backend, the project utilizes the <b>HTML5 Canvas API</b>. This allows for direct pixel-level access, enabling custom image processing algorithms written in pure JavaScript.
-                </p>
-                
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                   <div className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm text-center md:text-left">
-                      <span className="text-[#8FB94B] font-bold text-xs uppercase tracking-widest">Engine</span>
-                      <p className="text-sm font-bold text-gray-800">Canvas API</p>
-                   </div>
-                   <div className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm text-center md:text-left">
-                      <span className="text-[#8FB94B] font-bold text-xs uppercase tracking-widest">Logic</span>
-                      <p className="text-sm font-bold text-gray-800">ES6+ JavaScript</p>
-                   </div>
-                   <div className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm text-center md:text-left">
-                      <span className="text-[#8FB94B] font-bold text-xs uppercase tracking-widest">Deployment</span>
-                      <p className="text-sm font-bold text-gray-800">GitHub Actions</p>
-                   </div>
+        <div className="mt-6 max-w-5xl mx-auto">
+          <div className="space-y-8">
+            {/* Descriptive Text - Full Width */}
+            <p className="text-gray-600 leading-relaxed text-justify md:text-center max-w-3xl mx-auto">
+              To achieve maximum performance without a backend, the project utilizes the <b>HTML5 Canvas Element</b>. This allows for direct pixel-level access, enabling custom image processing algorithms written in pure JavaScript.
+            </p>
+            
+            {/* Tech Cards - Reorganized for better spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Engine Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/canvas_element_logo.webp" alt="Canvas" className="w-full h-full object-contain" />
                 </div>
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Engine</span>
+                  <p className="text-sm font-bold text-gray-800">Canvas Element</p>
+                </div>
+              </div>
 
-                <div className="bg-black text-white p-6 rounded-2xl flex justify-between items-center px-12">
-                   <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-widest">Server Latency</p>
-                      <p className="text-2xl font-bold text-[#D9F2B1]">0 ms</p>
-                   </div>
-                   <div className="w-px h-10 bg-gray-800"></div>
-                   <div>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-widest">Data Privacy</p>
-                      <p className="text-2xl font-bold text-[#D9F2B1]">100% Local</p>
-                   </div>
+              {/* Logic Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/JS_logo.jpg" alt="JS" className="w-full h-full object-contain" />
                 </div>
-             </div>
-             
-             <div className="lg:col-span-4 flex items-center justify-center bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-6">
-                <p className="text-xs text-gray-400 text-center italic">
-                  [Flowchart: Source Image → Canvas Context2D → Filter Matrix → Viewport Render]
-                </p>
-             </div>
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Logic</span>
+                  <p className="text-sm font-bold text-gray-800">ES6+ JavaScript</p>
+                </div>
+              </div>
+
+              {/* Deployment Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/github_logo.webp" alt="CI/CD" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Deployment</span>
+                  <p className="text-sm font-bold text-gray-800">GitHub Actions</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </SectionWrapper>
