@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Cpu, Rocket, Zap, ChevronDown } from 'lucide-react';
+import { Sparkles, Cpu, Rocket, ChevronDown } from 'lucide-react';
 
 // 1. THE REUSABLE SECTION WRAPPER (From your Internship Page)
 const SectionWrapper = ({ title, icon, isOpen, onToggle, children }) => {
@@ -317,34 +317,33 @@ const Image_Editor_Project = () => {
         isOpen={!!openSections.future}
         onToggle={() => toggleSection('future')}
       >
-        <div className="mt-8 flex flex-col md:flex-row items-center gap-10 max-w-4xl mx-auto pb-6">
-          <div className="flex-1 space-y-6">
+        <div className="mt-8 flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto pb-6">
+          {/* Left Side: Timeline Points */}
+          <div className="flex-1 space-y-8">
             <div className="relative pl-6 border-l-2 border-[#D9F2B1] space-y-2">
               <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">v3.0 - Intelligent Editing</h4>
-              <p className="text-sm text-gray-600 text-justify">Integrating <b>TensorFlow.js</b> for client-side background removal and object detection without requiring an internet connection.</p>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Integrating <b>TensorFlow.js</b> for client-side background removal and object detection without requiring an internet connection.</p>
             </div>
             
             <div className="relative pl-6 border-l-2 border-gray-200 space-y-2">
               <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">Advanced Layering</h4>
-              <p className="text-sm text-gray-600 text-justify">Moving from a single-canvas system to a stack-based architecture to allow text overlays and multi-image compositing.</p>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Moving from a single-canvas system to a stack-based architecture to allow text overlays and multi-image compositing.</p>
             </div>
 
             <div className="relative pl-6 border-l-2 border-gray-200 space-y-2">
               <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">PWA Support</h4>
-              <p className="text-sm text-gray-600 text-justify">Transforming the editor into a Progressive Web App for a native, offline-capable mobile experience.</p>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Transforming the editor into a Progressive Web App for a native, offline-capable mobile experience.</p>
             </div>
           </div>
-
-          <div className="w-full md:w-1/3 p-6 bg-[#D9F2B1]/10 rounded-3xl border border-[#D9F2B1]/30 flex flex-col items-center text-center">
-            <div className="w-12 h-12 bg-[#D9F2B1] rounded-full flex items-center justify-center mb-4 shadow-sm">
-               <Zap className="text-black w-6 h-6" />
-            </div>
-            <h5 className="font-bold text-sm">Vision</h5>
-            <p className="text-[11px] text-gray-500 mt-2">Building the fastest, most secure alternative to cloud-based editors.</p>
+          {/* Right Side: Image Only */}
+          <div className="w-full md:w-1/3 flex items-center justify-center">
+            <img 
+              src="/assets/bakchodi.webp" 
+              alt="Future Vision" className="w-full h-auto rounded-xl shadow-lg border border-gray-100"
+            />
           </div>
         </div>
       </SectionWrapper>
-
       <footer className="mt-20 text-center py-16 bg-black text-white rounded-3xl relative overflow-hidden">
         <h2 className="text-3xl font-bold mb-4">Explore the Code</h2>
         <a 
