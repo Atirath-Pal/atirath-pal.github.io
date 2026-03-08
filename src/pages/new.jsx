@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Cpu, Rocket, ChevronDown } from 'lucide-react';
 
-// 1. THE REUSABLE SECTION WRAPPER
+// 1. THE REUSABLE SECTION WRAPPER (From your Internship Page)
 const SectionWrapper = ({ title, icon, isOpen, onToggle, children }) => {
   const contentRef = useRef(null);
   const [height, setHeight] = useState(0);
@@ -16,24 +16,24 @@ const SectionWrapper = ({ title, icon, isOpen, onToggle, children }) => {
   }, [isOpen]);
 
   return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#303134] shadow-sm mb-4 transition-colors duration-300">
+    <div className="border border-gray-200 rounded-xl bg-white shadow-sm mb-4">
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 dark:hover:bg-[#3c4043] transition-colors rounded-t-xl"
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors rounded-t-xl"
       >
         <div className="flex items-center gap-4">
           <span
             className={`p-2 rounded-lg transition-colors duration-300 ${
-              isOpen ? 'bg-[#D9F2B1] text-black' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+              isOpen ? 'bg-[#D9F2B1] text-black' : 'bg-gray-100 text-gray-500'
             }`}
           >
             {icon}
           </span>
-          <span className="text-xl font-bold dark:text-white">{title}</span>
+          <span className="text-xl font-bold">{title}</span>
         </div>
         <ChevronDown
-          className={`transition-transform duration-500 ease-in-out dark:text-gray-400 ${
+          className={`transition-transform duration-500 ease-in-out ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -43,7 +43,7 @@ const SectionWrapper = ({ title, icon, isOpen, onToggle, children }) => {
         className="overflow-hidden transition-[height] duration-300 ease-out"
         style={{ height }}
       >
-        <div ref={contentRef} className="p-6 pt-0 border-t border-gray-50 dark:border-gray-700">
+        <div ref={contentRef} className="p-6 pt-0 border-t border-gray-50">
           {children}
         </div>
       </div>
@@ -70,7 +70,7 @@ const ImageSlider = ({ desktopImg, mobileImg }) => {
 
   const nextSlide = () => setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
   const prevSlide = () => setCurrentIndex((prev) => (prev === 1 ? 0 : 1));
-  
+
   // Swipe Logic
   const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientX);
   const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
@@ -95,7 +95,7 @@ const ImageSlider = ({ desktopImg, mobileImg }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-100 dark:border-gray-700 group">
+      <div className="relative w-full overflow-hidden rounded-2xl bg-white shadow-2xl border border-gray-100 group">
         {/* Sliding Image Track */}
         <div 
           className="flex transition-transform duration-500 ease-out"
@@ -105,7 +105,7 @@ const ImageSlider = ({ desktopImg, mobileImg }) => {
           onTouchEnd={handleTouchEnd}
         >
           {images.map((img, index) => (
-            <div key={index} className="w-full flex-shrink-0 flex items-center justify-center p-2 bg-white dark:bg-gray-800">
+            <div key={index} className="w-full flex-shrink-0 flex items-center justify-center p-2 bg-white">
               <img 
                 src={img} 
                 alt={getCaption()} 
@@ -126,25 +126,25 @@ const ImageSlider = ({ desktopImg, mobileImg }) => {
         {/* Indicators */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
           {images.map((_, i) => (
-            <div key={i} className={`h-1.5 rounded-full transition-all ${currentIndex === i ? 'bg-black dark:bg-white w-4' : 'bg-gray-300 dark:bg-gray-600 w-1.5'}`} />
+            <div key={i} className={`h-1.5 rounded-full transition-all ${currentIndex === i ? 'bg-black w-4' : 'bg-gray-300 w-1.5'}`} />
           ))}
         </div>
       </div>
 
       {/* THE DYNAMIC CAPTION: This is what you asked for */}
       <div className="mt-4 flex items-center gap-3">
-        <div className="h-px w-8 bg-gray-200 dark:bg-gray-700"></div>
-        <p className="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.3em] animate-pulse">
+        <div className="h-px w-8 bg-gray-200"></div>
+        <p className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.3em] animate-pulse">
           {getCaption()}
         </p>
-        <div className="h-px w-8 bg-gray-200 dark:bg-gray-700"></div>
+        <div className="h-px w-8 bg-gray-200"></div>
       </div>
     </div>
   );
 };
 
 // 2. THE MAIN PROJECT PAGE
-const ImageEditorProject = () => {
+const Image_Editor_Project = () => {
   const [openSections, setOpenSections] = useState({});
 
   const toggleSection = (id) => {
@@ -155,19 +155,19 @@ const ImageEditorProject = () => {
   };
 
   return (
-    <section className="bg-[#F9FAF7] dark:bg-[#202124] min-h-screen px-6 py-12 md:px-20 lg:px-40 font-sans text-black dark:text-white transition-colors duration-300">
+    <section className="bg-[#F9FAF7] min-h-screen px-6 py-12 md:px-20 lg:px-40 font-sans text-black">
       <div className="mb-8">
         <Link
           to="/"
-          className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+          className="inline-flex items-center text-sm text-gray-600 hover:text-black transition-colors"
         >
           ← Back to Search
         </Link>
       </div>
 
       <header className="mb-12">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 dark:text-white">Online Image Editor</h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 italic">High-Performance Client-Side Pixel Manipulation</p>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">Online Image Editor</h1>
+        <p className="text-lg text-gray-500 italic">High-Performance Client-Side Pixel Manipulation</p>
       </header>
 
       {/* INTRODUCTION BLOCK */}
@@ -176,32 +176,32 @@ const ImageEditorProject = () => {
           <div className="rounded-3xl overflow-hidden bg-[#D9F2B1] p-4 shadow-sm transition-shadow duration-500 group-hover:shadow-xl">
             <img 
               src="/assets/Image_Editor.png" 
-              alt="Interface mockup" 
+              alt="Interface mockup showing the filter and adjustment panels" 
               className="w-full h-auto rounded-2xl object-contain transform transition-transform duration-500 group-hover:scale-[1.02]" 
             />
           </div>
         </div>
         
         <div className="w-full lg:w-3/5 text-justify">
-          <h2 className="text-2xl font-bold mb-6 border-b-2 border-[#D9F2B1] inline-block dark:text-white">
+          <h2 className="text-2xl font-bold mb-6 border-b-2 border-[#D9F2B1] inline-block">
             Project Overview
           </h2>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+          <p className="text-gray-700 leading-relaxed mb-6">
             Online Image Editor is a high-performance, browser-based photo editing application designed with a mobile-first approach. It enables users to apply professional-grade filters and fine-tune image properties instantly without any server-side processing.
           </p>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            By leveraging the <span className="font-semibold text-black dark:text-white">Canvas API</span>, all manipulation occurs locally. This ensures complete data privacy and near-zero latency, as no image data ever leaves the user's device.
+          <p className="text-gray-700 leading-relaxed">
+            By leveraging the <span className="font-semibold text-black">Canvas API</span>, all manipulation occurs locally. This ensures complete data privacy and near-zero latency, as no image data ever leaves the user's device.
           </p>
           
           <div className="mt-8 flex flex-col gap-4">
-            <p className="text-gray-900 dark:text-gray-200 font-bold flex items-center gap-2">
+            <p className="text-gray-900 font-bold flex items-center gap-2">
               Wanna try it now? <span className="animate-bounce">🚀</span>
             </p>
             <a 
               href="https://atirath-pal.github.io/Image-Editor-2/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between bg-black dark:bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-700 transition-all group w-fit gap-6"
+              className="inline-flex items-center justify-between bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-all group w-fit gap-6"
             >
               <span className="font-bold tracking-wide text-sm text-white">Launch Editor</span>
               <div className="bg-[#D9F2B1] rounded-full p-1 group-hover:translate-x-1 transition-transform">
@@ -223,11 +223,11 @@ const ImageEditorProject = () => {
         onToggle={() => toggleSection('features')}
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-8 mt-6 items-center text-left">
-
-          {/* Left: Key Capabilities (5 Cols) */}
+          
+          {/* Left: Simple Points (5 Cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <h3 className="text-xl font-bold text-black dark:text-white mb-6">Key Capabilities</h3>
-
+            <h3 className="text-xl font-bold text-black mb-6">Key Capabilities</h3>
+            
             <ul className="space-y-5">
               {[
                 { title: "Client-Side Rendering", desc: "Lightning-fast processing directly in your browser." },
@@ -236,33 +236,24 @@ const ImageEditorProject = () => {
                 { title: "Instant Download", desc: "Save your edited masterpieces with a single click." },
                 { title: "Mobile-First UI", desc: "Fully responsive design for editing on the go." }
               ].map((feature, idx) => (
-                <li key={idx} className="flex gap-4 items-start group">
-                  {/* Dot Indicator */}
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-[#D9F2B1] shrink-0 shadow-[0_0_8px_rgba(217,242,177,0.5)]" />
-
+                <li key={idx} className="flex gap-4 items-start">
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-[#D9F2B1] shrink-0" />
                   <div>
-                    <span className="font-bold text-gray-900 dark:text-gray-100 block transition-colors">
-                      {feature.title}
-                    </span>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                      {feature.desc}
-                    </p>
+                    <span className="font-bold text-gray-900 block">{feature.title}</span>
+                    <p className="text-sm text-gray-500">{feature.desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
-            
+
           {/* Right: Adaptive Image Slider (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-xl dark:shadow-2xl/50">
-              <ImageSlider 
-                desktopImg="/assets/Desktop_UI_Image_Editor_Project.png" 
-                mobileImg="/assets/Mobile_UI_Image_Editor_Project.png" 
-              />
-            </div>
+            <ImageSlider 
+              desktopImg="/assets/Desktop_UI_Image_Editor_Project.png" 
+              mobileImg="/assets/Mobile_UI_Image_Editor_Project.png" 
+            />
           </div>
-            
         </div>
       </SectionWrapper>
 
@@ -275,54 +266,45 @@ const ImageEditorProject = () => {
       >
         <div className="mt-6 max-w-5xl mx-auto">
           <div className="space-y-8">
-            {/* Descriptive Text - Full Width with Dark Mode Support */}
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-justify md:text-center max-w-3xl mx-auto">
+            {/* Descriptive Text - Full Width */}
+            <p className="text-gray-600 leading-relaxed text-justify md:text-center max-w-3xl mx-auto">
               To achieve maximum performance without a backend, the project utilizes the <b>HTML5 Canvas Element</b>. This allows for direct pixel-level access, enabling custom image processing algorithms written in pure JavaScript.
             </p>
-
-            {/* Tech Cards - Reorganized & Dark Mode Ready */}
+            
+            {/* Tech Cards - Reorganized for better spacing */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  label: "Engine",
-                  title: "Canvas Element",
-                  img: "/assets/canvas_element_logo.webp",
-                  alt: "Canvas",
-                },
-                {
-                  label: "Logic",
-                  title: "ES6+ JavaScript",
-                  img: "/assets/JS_logo.jpg",
-                  alt: "JS",
-                },
-                {
-                  label: "Deployment",
-                  title: "GitHub Actions",
-                  img: "/assets/github_logo.webp",
-                  alt: "CI/CD",
-                },
-              ].map((tech, i) => (
-                <div 
-                  key={i} 
-                  className="bg-white dark:bg-[#3c4043] border border-gray-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm flex items-center gap-4 transition-colors duration-200"
-                >
-                  <div className="w-24 h-12 flex-shrink-0 bg-gray-50 dark:bg-gray-800 rounded-xl flex items-center justify-center p-2">
-                    <img 
-                      src={tech.img} 
-                      alt={tech.alt} 
-                      className="w-full h-full object-contain" 
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">
-                      {tech.label}
-                    </span>
-                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200">
-                      {tech.title}
-                    </p>
-                  </div>
+              {/* Engine Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/canvas_element_logo.webp" alt="Canvas" className="w-full h-full object-contain" />
                 </div>
-              ))}
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Engine</span>
+                  <p className="text-sm font-bold text-gray-800">Canvas Element</p>
+                </div>
+              </div>
+
+              {/* Logic Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/JS_logo.jpg" alt="JS" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Logic</span>
+                  <p className="text-sm font-bold text-gray-800">ES6+ JavaScript</p>
+                </div>
+              </div>
+
+              {/* Deployment Card */}
+              <div className="bg-white border border-gray-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
+                <div className="w-24 h-12 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center p-2">
+                  <img src="/assets/github_logo.webp" alt="CI/CD" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span className="text-[#8FB94B] font-bold text-[10px] uppercase tracking-widest block">Deployment</span>
+                  <p className="text-sm font-bold text-gray-800">GitHub Actions</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,40 +320,32 @@ const ImageEditorProject = () => {
         <div className="mt-8 flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto pb-6">
           {/* Left Side: Timeline Points */}
           <div className="flex-1 space-y-8">
-            <div className="relative pl-6 border-l-2 border-[#D9F2B1] space-y-2 transition-colors">
-              <h4 className="font-bold text-gray-800 dark:text-gray-200 uppercase text-xs tracking-wider">v3.0 - Intelligent Editing</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-justify leading-relaxed">
-                Integrating <b>TensorFlow.js</b> for client-side background removal and object detection without requiring an internet connection.
-              </p>
+            <div className="relative pl-6 border-l-2 border-[#D9F2B1] space-y-2">
+              <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">v3.0 - Intelligent Editing</h4>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Integrating <b>TensorFlow.js</b> for client-side background removal and object detection without requiring an internet connection.</p>
+            </div>
+            
+            <div className="relative pl-6 border-l-2 border-gray-200 space-y-2">
+              <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">Advanced Layering</h4>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Moving from a single-canvas system to a stack-based architecture to allow text overlays and multi-image compositing.</p>
             </div>
 
-            <div className="relative pl-6 border-l-2 border-[#D9F2B1] space-y-2 transition-colors">
-              <h4 className="font-bold text-gray-800 dark:text-gray-200 uppercase text-xs tracking-wider">Advanced Layering</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-justify leading-relaxed">
-                Moving from a single-canvas system to a stack-based architecture to allow text overlays and multi-image compositing.
-              </p>
-            </div>
-
-            <div className="relative pl-6 border-l-2 border-[#D9F2B1] space-y-2 transition-colors">
-              <h4 className="font-bold text-gray-800 dark:text-gray-200 uppercase text-xs tracking-wider">PWA Support</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-justify leading-relaxed">
-                Transforming the editor into a Progressive Web App for a native, offline-capable mobile experience.
-              </p>
+            <div className="relative pl-6 border-l-2 border-gray-200 space-y-2">
+              <h4 className="font-bold text-gray-800 uppercase text-xs tracking-wider">PWA Support</h4>
+              <p className="text-sm text-gray-600 text-justify leading-relaxed">Transforming the editor into a Progressive Web App for a native, offline-capable mobile experience.</p>
             </div>
           </div>
-
           {/* Right Side: Image Only */}
           <div className="w-full md:w-1/3 flex items-center justify-center">
             <img 
               src="/assets/bakchodi.webp" 
-              alt="Future Vision" 
-              className="w-full h-auto rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 transition-colors"
+              alt="Future Vision" className="w-full h-auto rounded-xl shadow-lg border border-gray-100"
             />
           </div>
         </div>
       </SectionWrapper>
-
-      <footer className="mt-20 text-center py-16 bg-black dark:bg-[#171717] text-white rounded-3xl relative overflow-hidden transition-colors">
+      
+      <footer className="mt-20 text-center py-16 bg-black text-white rounded-3xl relative overflow-hidden">
         <h2 className="text-3xl font-bold mb-4">Explore the Code</h2>
         <a 
           href="https://github.com/atirath-pal/Image-Editor-2" 
@@ -386,4 +360,4 @@ const ImageEditorProject = () => {
   );
 };
 
-export default ImageEditorProject;
+export default Image_Editor_Project;

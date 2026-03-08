@@ -1,34 +1,28 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Home from './pages/Home';
-import IIT_Mandi_Gallary from './pages/IIT_Mandi_Gallary'; // 1. Import the new Gallery page
+import IITMandiGallery from './pages/IIT_Mandi_Gallary';
 import portfolioRegistry from './portfolioRegistry';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {/* Home Route */}
-          <Route path="/" element={<Home />} />
-
-          {/* 2. Static Route for Gallery (Hidden from Registry Loop) */}
-          <Route 
-            path="/internships/iit-mandi/gallary" 
-            element={<IIT_Mandi_Gallary />} 
-          />
-
-          {/* Dynamic Routes from Registry (Search Results) */}
-          {portfolioRegistry.map((entry) => (
-            <Route
-              key={entry.id}
-              path={entry.path}
-              element={<entry.component />}
-            />
-          ))}
-        </Routes>
+    <ThemeProvider>
+      {/* This wrapper ensures the background changes everywhere */}
+      <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/internships/iit-mandi/gallary" element={<IITMandiGallery />} />
+              {portfolioRegistry.map((entry) => (
+                <Route key={entry.id} path={entry.path} element={<entry.component />} />
+              ))}
+            </Routes>
+          </div>
+        </Router>
       </div>
-    </Router>
+    </ThemeProvider>
   );
 }
 

@@ -28,14 +28,14 @@ const IITMandiGallery = () => {
   );
 
   return (
-    <div className={`min-h-screen bg-[#FAFAFA] p-4 md:p-12 ${selectedImg ? 'overflow-hidden' : ''}`}>
+    <div className={`min-h-screen bg-[#FAFAFA] dark:bg-[#202124] p-4 md:p-12 transition-colors duration-300 ${selectedImg ? 'overflow-hidden' : ''}`}>
       
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <Link 
             to="/internships/iit-mandi" 
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-black transition-colors mb-4 md:mb-6 group"
+            className="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors mb-4 md:mb-6 group"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             <span className="text-xs md:text-sm font-medium">Back to Internship Details</span>
@@ -43,17 +43,13 @@ const IITMandiGallery = () => {
           
           <div className="flex items-center gap-3 mb-2">
             <Camera className="text-[#8FB94B] w-8 h-8 md:w-10 md:h-10" />
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight uppercase">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight uppercase">
               Kamand Valley
             </h1>
           </div>
-          <p className="text-gray-500 text-sm md:text-lg max-w-2xl italic">
+          <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg max-w-2xl italic">
             "{allImages.length} optimized memories from IIT Mandi."
           </p>
-        </div>
-
-        <div className="hidden md:block bg-black text-white px-6 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase">
-          Performance Mode: WebP + Lazy Load
         </div>
       </div>
 
@@ -66,22 +62,22 @@ const IITMandiGallery = () => {
             className="break-inside-avoid group cursor-pointer"
           >
             {/* Image Container */}
-            <div className="relative rounded-xl overflow-hidden shadow-sm border border-gray-100 transition-all duration-500 md:group-hover:shadow-xl">
+            <div className="relative rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-all duration-500 md:group-hover:shadow-xl">
               <img 
                 src={img.thumb} 
                 alt={img.label} 
                 className="w-full h-auto object-cover transition-transform duration-700 md:group-hover:scale-105"
                 loading="lazy" 
               />
-              {/* Subtle Icon Overlay (Optional: keeps the "Expand" hint without the text) */}
-              <div className="absolute inset-0 bg-black/10 opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              {/* Subtle Icon Overlay */}
+              <div className="absolute inset-0 bg-black/10 dark:bg-black/30 opacity-0 md:group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <Maximize2 className="text-white w-5 h-5" />
               </div>
             </div>
         
-            {/* NEW: The Caption Below the Image */}
+            {/* The Caption Below the Image */}
             <div className="mt-2 px-1">
-              <p className="text-[9px] md:text-[11px] font-bold text-gray-700 uppercase tracking-wider leading-tight">
+              <p className="text-[9px] md:text-[11px] font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider leading-tight">
                 {img.label}
               </p>
             </div>
@@ -115,7 +111,7 @@ const IITMandiGallery = () => {
         </div>
       )}
 
-      <footer className="mt-16 md:mt-20 py-10 text-center border-t border-gray-100 text-gray-400 text-[10px] tracking-widest uppercase">
+      <footer className="mt-16 md:mt-20 py-10 text-center border-t border-gray-100 dark:border-gray-800 text-gray-400 dark:text-gray-600 text-[10px] tracking-widest uppercase">
         End of Gallery • {allImages.length} High-Resolution Captures
       </footer>
     </div>
