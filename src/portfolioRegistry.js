@@ -1,6 +1,6 @@
 import IITMandiInternship from './pages/IIT_Mandi_Internship';
 import ImageEditorProject from './pages/Image_Editor_Project_Page';
-import OnlineCodeProject from './pages/Online_Code_Project_Page';
+import OnlineCodeProject from './pages/Online_Code_Editor_Project_Page';
 import TestFakeInternship from './pages/Test_Fake_Internship';
 
 const portfolioRegistry = [
