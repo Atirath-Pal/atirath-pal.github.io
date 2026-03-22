@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react'; // Added useRef
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion'; 
 import portfolioRegistry from '../portfolioRegistry';
@@ -14,6 +14,19 @@ const TABS = [
 const Home = () => {
   const [activeTab, setActiveTab] = useState('All');
   const { isDarkMode, toggleTheme } = useTheme();
+  
+  // --- Video Replay Logic ---
+  const videoRef = useRef(null);
+
+  const handleVideoEnd = () => {
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0; // Reset to start
+        videoRef.current.play(); // Play again
+      }
+    }, 3000); // 3 second rest
+  };
+  // --------------------------
 
   const filteredResults = useMemo(() => {
     if (activeTab === 'All') return portfolioRegistry;
@@ -25,19 +38,16 @@ const Home = () => {
     visible: { opacity: 1, y: 0 }
   };
 
-  // Dynamic color for your signature SVG
-  const sigColor = isDarkMode ? "#FFFFFF" : "#000000";
-
   return (
     <div className="min-h-screen bg-white dark:bg-[#202124] flex flex-col font-sans selection:bg-blue-100 transition-colors duration-300">
       
       {/* Sticky Top Header */}
       <header className="sticky top-0 bg-white dark:bg-[#202124] z-10 border-b border-gray-200 dark:border-gray-700 md:pt-6 pt-4 transition-colors">
         
-        {/* Updated Container: flex-wrap for mobile stacking, flex-nowrap for desktop */}
+        {/* Updated Container */}
         <div className="flex flex-wrap md:flex-nowrap items-center w-full gap-4 md:gap-10 px-4 md:px-8 max-w-[1400px]">
           
-          {/* 1. Logo - Mobile: Left | Desktop: Left */}
+          {/* 1. Logo */}
           <motion.div 
             className="order-1 flex-shrink-0 cursor-pointer relative group" 
             onClick={() => setActiveTab('All')}
@@ -82,16 +92,18 @@ const Home = () => {
             </svg>
           </motion.div>
 
-          {/* 2. Signature Container - Responsive and Adjustable */}
+          {/* 2. Signature Container - With Auto-Replay Logic */}
           <div className="order-2 md:order-4 flex-grow md:flex-grow-0 flex items-center justify-center 
                           h-[55px] md:h-[65px] lg:h-[75px] 
                           min-w-[160px] md:w-[230px] lg:w-[300px] 
                           overflow-hidden transition-all duration-300">
             <video
+              ref={videoRef}
               key={isDarkMode ? "dark-sig" : "light-sig"}
               autoPlay
               muted
               playsInline
+              onEnded={handleVideoEnd}
               className={`h-full w-full object-contain transform 
                           scale-[1.4] 
                           translate-x-[-10px] 
@@ -108,8 +120,8 @@ const Home = () => {
               Your browser does not support the video tag.
             </video>
           </div>    
-                          
-          {/* 3. Toggle Button - Naturally pushed to the right by the Signature */}
+                           
+          {/* 3. Toggle Button */}
           <button 
             onClick={toggleTheme}
             className="order-3 md:order-3 p-3 flex-shrink-0 rounded-full 
@@ -120,7 +132,7 @@ const Home = () => {
             {isDarkMode ? '☀️' : '🌙'}
           </button>
           
-          {/* 4. Search Bar - Mobile: Full width below top items | Desktop: Middle (flex-1) */}
+          {/* 4. Search Bar */}
           <div className="order-4 md:order-2 w-full md:flex-1 md:max-w-[692px] relative group flex items-center">
             <div className="w-full flex items-center gap-3 bg-white dark:bg-[#303134] rounded-full shadow-md border border-gray-200 dark:border-transparent hover:shadow-lg focus-within:shadow-lg transition-shadow px-5 py-3">
               <span className="text-gray-400">🔍</span>
@@ -139,7 +151,7 @@ const Home = () => {
 
         </div>
 
-        {/* Navigation Tabs - Remains Completely Unchanged */}
+        {/* Navigation Tabs */}
         <nav className="flex px-4 md:ml-[160px] mt-4 gap-6 overflow-x-auto no-scrollbar">
           {TABS.map((tab) => (
             <button
@@ -158,7 +170,7 @@ const Home = () => {
         </nav>
       </header>
 
-      {/* Main Content Area - Remains Completely Unchanged */}
+      {/* Main Content Area */}
       <main className="flex-1 px-4 md:ml-[160px] mt-2 max-w-[652px]">
         <p className="text-sm text-[#70757a] dark:text-[#9aa0a6] py-3">
           About {filteredResults.length} result{filteredResults.length !== 1 ? 's' : ''} ({Math.random().toFixed(2)} seconds)
@@ -190,7 +202,7 @@ const Home = () => {
         </section>
       </main>
 
-      {/* Footer - Remains Completely Unchanged */}
+      {/* Footer */}
       <footer className="bg-[#f2f2f2] dark:bg-[#171717] border-t border-gray-300 dark:border-gray-800 px-4 md:px-[160px] py-3 text-sm text-[#70757a] dark:text-[#9aa0a6] transition-colors">
         <div className="flex gap-6">
           <span className="font-bold border-r pr-6 border-gray-300 dark:border-gray-700">India</span>
