@@ -92,10 +92,14 @@ const Home = () => {
               autoPlay
               muted
               playsInline
-              className="h-full w-full object-contain transform 
-                         scale-[1.4] 
-                         translate-x-[-10px] 
-                         translate-y-[-2px]" 
+              className={`h-full w-full object-contain transform 
+                          scale-[1.4] 
+                          translate-x-[-10px] 
+                          translate-y-[-2px] 
+                          ${isDarkMode 
+                            ? 'mix-blend-screen brightness-110 contrast-125' 
+                            : 'mix-blend-multiply'
+                          }`} 
             >
               <source 
                 src={isDarkMode ? "assets/Signature_dark_mode.mp4" : "assets/Signature_light_mode.mp4"} 
@@ -103,8 +107,8 @@ const Home = () => {
               />
               Your browser does not support the video tag.
             </video>
-          </div>
-                    
+          </div>    
+                          
           {/* 3. Toggle Button - Naturally pushed to the right by the Signature */}
           <button 
             onClick={toggleTheme}
